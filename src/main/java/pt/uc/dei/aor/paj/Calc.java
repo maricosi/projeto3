@@ -33,6 +33,12 @@ public class Calc implements Serializable{
 	@Inject 
 	private Estatistica est;
 	
+	@Inject 
+	private Cronometro temp;
+	
+	private long teste=222222;
+	/*private long tempo_inicial;
+	private long tempo_final;*/
 	
 	
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
@@ -157,7 +163,8 @@ public class Calc implements Serializable{
 			insereVirgula(".");
 		} break;
 		case "igual": {
-			calcula();			
+			calcula();
+			
 		} break;
 		
 		}
@@ -165,19 +172,40 @@ public class Calc implements Serializable{
 	}
 	
 	private void calcula(){
+		
+	long tempo_inicial=System.currentTimeMillis();
+		long tempo_final=0;
+		long temdiff=0;
+		
+		String res=null;
+	
 		if(operadorValido && parentsisAberto == false){
-			String res = opera(mostrador, expressao);
+			res = opera(mostrador, expressao);
 			if(res.contains("erros") == false){
-				ArrayList<Input> inputs = expressao.getInputs();
-				hist.adicionaEntrada(new Entrada(mostrador, res, inputs));
+			 ArrayList<Input> inputs = expressao.getInputs();
+			 
+			// tempo_final=System.currentTimeMillis()-tempo_inicial;
+			 
+			 	tempo_final=(System.currentTimeMillis());
+			 	
+			 	temdiff= tempo_final-tempo_inicial;
+			 	
+				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,temdiff));
+				
+			
+				
 				mostrador = expressao.clear();
 				mostrador = expressao.add(new Input("nm", res));
 				init();
 				operadorValido = true;
 			}else {
+				
 				mostrador = res;
+				
 			}			
 		}
+		
+		
 	}
 	
 	private void factorial(){		
@@ -424,6 +452,25 @@ public class Calc implements Serializable{
 		expressao.add(new Input("nm", ent.getRes()));
 		operadorValido = true;
 	}
+	
+	public void tempo_exec(Entrada ent){
+		mostrador=Long.toString(ent.getTempo());
+		//mostrador=Long.toString(temp.getStopValue()-temp.getStartValue());
+		/*System.out.println("tempo inicio"+ temp.getStartValue());
+		System.out.println("tempo fim"+ temp.getStopValue());*/
+	/*	this.teste=this.temp.getStopValue()-this.temp.getStartValue();*/
+	} 
+
+	
+
+
+	public long getTeste() {
+		return teste;
+	}
+
+	public void setTeste(long teste) {
+		this.teste = teste;
+	}
 
 	public String getExp() {
 		return mostrador;
@@ -456,5 +503,39 @@ public class Calc implements Serializable{
 	public void setGraus(boolean graus) {
 		this.graus = graus;
 	}
+	
+	public Cronometro getTemp() {
+		return temp;
+	}
+
+	public void setTemp(Cronometro temp) {
+		this.temp = temp;
+	}
+
+	public String getMostrador() {
+		return mostrador;
+	}
+
+	public void setMostrador(String mostrador) {
+		this.mostrador = mostrador;
+	}
+
+	/*public long getTempo_final() {
+		return tempo_final;
+	}
+
+	public void setTempo_final(long tempo_final) {
+		this.tempo_final = tempo_final;
+	}
+
+	public long getTempo_inicial() {
+		return tempo_inicial;
+	}
+
+	public void setTempo_inicial(long tempo_inicial) {
+		this.tempo_inicial = tempo_inicial;
+	}
+	*/
+	
 
 }
