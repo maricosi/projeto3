@@ -20,40 +20,46 @@ import javax.inject.Named;
 public class Calc implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String mostrador="";
 	private String type="";
-	
+
 	@Inject
 	private Expressao expressao;
-	
+
 	@Inject
 	private Historico hist;
-	
+
 	@Inject 
 	private Estatistica est;
-	
+
 	@Inject 
 	private Cronometro temp;
-	
+
 	private long teste=222222;
 	/*private long tempo_inicial;
 	private long tempo_final;*/
-	
-	
+
+
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido; // indica se é válido usar um operador na expressão
 	private boolean existeVirgula; // indica se existe uma vírgula na última parte numérica da expressão
 	private boolean parentsisAberto; // indica se existe um parentsis aberto
 	private boolean graus = false;	// indica se os ângulos introduzidos são em radianos (predefinido) ou em graus
-	
+
+	private long tempo_inicial;
+
+	private long tempo_final;
+
+	private long diferencatempo;
+
 	public Calc(){
 		init();		
 	}	
-	
+
 	public void read(ActionEvent evento){
-		
-		
+
+
 		switch(evento.getComponent().getId()){
 		case "num0": {			
 			novoDigito("0");	
@@ -164,60 +170,54 @@ public class Calc implements Serializable{
 		} break;
 		case "igual": {
 			calcula();
-			
+
 		} break;
-		
+
 		}
-		
+
 	}
-	
+
 	private void calcula(){
-		
-	long tempo_inicial=System.currentTimeMillis();
-		long tempo_final=0;
-		long temdiff=0;
-		
-		String res=null;
-	
+
 		if(operadorValido && parentsisAberto == false){
-			res = opera(mostrador, expressao);
+
+			tempo_inicial = System.currentTimeMillis();  
+			this.tempo_final = 0;  
+			this.diferencatempo=0;  
+
+			String res = opera(mostrador, expressao);
 			if(res.contains("erros") == false){
-			 ArrayList<Input> inputs = expressao.getInputs();
-			 
-			// tempo_final=System.currentTimeMillis()-tempo_inicial;
-			 
-			 	tempo_final=(System.currentTimeMillis());
-			 	
-			 	temdiff= tempo_final-tempo_inicial;
-			 	
-				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,temdiff));
-				
-			
-				
+				ArrayList<Input> inputs = expressao.getInputs();
+
+				tempo_final=System.currentTimeMillis(); 
+				diferencatempo=tempo_final-tempo_inicial;
+
+				System.out.println(tempo_inicial + " - " + tempo_final + " - " + diferencatempo);
+
+
+				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,Long.toString(diferencatempo)));
 				mostrador = expressao.clear();
 				mostrador = expressao.add(new Input("nm", res));
 				init();
 				operadorValido = true;
 			}else {
-				
 				mostrador = res;
-				
 			}			
 		}
-		
-		
+
+
 	}
-	
+
 	private void factorial(){		
 		if(mostrador.length() > 0 && expressao.peekLastInput().getTipo().contains("nm")){
 			String tmp = expressao.peekLastInput().getConteudo();			
 			double val = Double.parseDouble(tmp);
-			if(val%1 == 0 && val > 0 && val <= 170){
+			if(val%1 == 0 && val > 0 && val <= 10000000){
 				mostrador = expressao.add(new Input("op", "!"));
 			}			
 		}
 	}
-	
+
 	private void novoLogaritmo(String d){
 		operadorValido = true;
 		parentsisAberto = true;
@@ -226,7 +226,7 @@ public class Calc implements Serializable{
 		}		
 		mostrador = expressao.add(new Input("op", d));
 	}
-	
+
 	private void insereE(String d){
 		operadorValido = true;
 		if(existeVirgula == false){
@@ -235,7 +235,7 @@ public class Calc implements Serializable{
 		est.recolheInput(new Input("e", d));
 		mostrador = expressao.add(new Input("nm", d));
 	}
-	
+
 	private void inserePI(String d){
 		operadorValido = true;
 		if(existeVirgula == false){
@@ -244,7 +244,7 @@ public class Calc implements Serializable{
 		est.recolheInput(new Input("pi", d));
 		mostrador = expressao.add(new Input("nm", d));
 	}
-	
+
 	private void quadrado(){		
 		if(mostrador.length() > 0 && expressao.peekLastInput().getTipo().contains("nm")){
 			String tmp = expressao.getLastInput();			
@@ -253,7 +253,7 @@ public class Calc implements Serializable{
 			est.recolheInput(new Input("x^2","x^2"));			
 		}
 	}
-	
+
 	private void inverso(){		
 		if(mostrador.length() > 0 && expressao.peekLastInput().getTipo().contains("nm")){
 			String tmp = expressao.getLastInput();			
@@ -262,19 +262,19 @@ public class Calc implements Serializable{
 			est.recolheInput(new Input("1/x","1/x"));			
 		}
 	}
-	
+
 	private void novoOpAngulo(String d){
-		
+
 		parentsisAberto = true;
 		if(existeVirgula == false){
 			virgulaValida = true;
 		}		
 		if(graus)
 			d =	d.replace("(", "d(");
-		
+
 		mostrador = expressao.add(new Input("op", d));
 	}
-	
+
 	private void percentagem(){		
 		if(mostrador.length() > 0 && expressao.peekLastInput().getTipo().contains("nm")){
 			String tmp = expressao.getLastInput();			
@@ -283,7 +283,7 @@ public class Calc implements Serializable{
 			est.recolheInput(new Input("%","%"));			
 		}
 	}
-	
+
 	private void mudaSinal(){		
 		if(mostrador.length() > 0 && expressao.peekLastInput().getTipo().contains("nm")){
 			String tmp = expressao.getLastInput();			
@@ -296,7 +296,7 @@ public class Calc implements Serializable{
 			mostrador = expressao.add(new Input("nm", tmp));
 		}
 	}
-	
+
 	private void insereVirgula(String v){
 		if(virgulaValida && existeVirgula == false){
 			virgulaValida = false;
@@ -305,7 +305,7 @@ public class Calc implements Serializable{
 			mostrador = expressao.add(new Input("vg", v));
 		} 
 	}
-	
+
 	private void novoDigito(String d){
 		operadorValido = true;
 		if(existeVirgula == false){
@@ -313,7 +313,7 @@ public class Calc implements Serializable{
 		}
 		mostrador = expressao.add(new Input("nm", d));
 	}
-	
+
 	private void novaRaiz(String d){
 		operadorValido = true;
 		parentsisAberto = true;
@@ -322,19 +322,19 @@ public class Calc implements Serializable{
 		}
 		mostrador = expressao.add(new Input("op", d));
 	}
-	
+
 	private void novoParentsis(String d){
 		operadorValido = true;
 		if(parentsisAberto)
 			parentsisAberto = false;
 		else parentsisAberto = true;
-		
+
 		if(existeVirgula == false){
 			virgulaValida = true;
 		}
 		mostrador = expressao.add(new Input("par", d));
 	}
-	
+
 	private void novoOperador(String op){
 		if(operadorValido){
 			operadorValido = false;
@@ -343,49 +343,49 @@ public class Calc implements Serializable{
 			mostrador = expressao.add(new Input("op", op));			
 		}
 	}
-	
+
 	private String opera(String exp, Expressao inputs){
 		double res;
 		String out;
 
 		// definição de novas funções
-		
-		
+
+
 		Function cosd = new Function("cosd", 1) {
-		    @Override
-		    public double apply(double... args) {
-		    	return Math.cos(Math.toRadians(args[0]));
-		    }
+			@Override
+			public double apply(double... args) {
+				return Math.cos(Math.toRadians(args[0]));
+			}
 		};
-		
+
 		Function sind = new Function("sind", 1) {
-		    @Override
-		    public double apply(double... args) {
-		    	return Math.sin(Math.toRadians(args[0]));
-		    }
+			@Override
+			public double apply(double... args) {
+				return Math.sin(Math.toRadians(args[0]));
+			}
 		};
 		Function tand = new Function("tand", 1) {
-		    @Override
-		    public double apply(double... args) {
-		    	return Math.tan(Math.toRadians(args[0]));
-		    }
+			@Override
+			public double apply(double... args) {
+				return Math.tan(Math.toRadians(args[0]));
+			}
 		};
-		
+
 		Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
 
-		    @Override
-		    public double apply(double... args) {
-		        final int arg = (int) args[0];
-		        double result = 1;
-		        for (int i = 1; i <= arg; i++) {
-		            result *= i;
-		        }
-		        return result;
-		    }
+			@Override
+			public double apply(double... args) {
+				final int arg = (int) args[0];
+				double result = 1;
+				for (int i = 1; i <= arg; i++) {
+					result *= i;
+				}
+				return result;
+			}
 		};
-		
+
 		// end
-		
+
 		Expression e = new ExpressionBuilder(exp)
 		.function(cosd)
 		.function(sind)
@@ -395,7 +395,7 @@ public class Calc implements Serializable{
 		.build()
 		.setVariable("pi", Math.PI)
 		.setVariable("e", Math.E);
-		
+
 		if(e.validate().isValid()){
 			try {
 				res = e.evaluate();			
@@ -409,11 +409,11 @@ public class Calc implements Serializable{
 			} catch (Exception e1) {
 				out="erros na expressao";			
 			}
-			
+
 		} else {
 			out = "erros na expressao:\n";
 			List<String> erros = e.validate().getErrors();
-			
+
 			for (String string : erros) {
 				out += string + "\n";
 				System.out.println(string);
@@ -421,47 +421,45 @@ public class Calc implements Serializable{
 		}						
 		return out;
 	}
-	
+
 	private void init(){
 		virgulaValida = false;
 		operadorValido = false;
 		existeVirgula = false;
 		parentsisAberto = false;
 	}
-	
+
 	public void clearAll(){
 		mostrador = expressao.clear();
 		init();
 		operadorValido = true;
 	}
-	
+
 	public void clearLast(){
 		if(mostrador.length() > 0)
 			mostrador=expressao.remove();
 	}
-	
+
 	public void reUseExp(Entrada ent){
 		mostrador = ent.getExp();
 		expressao.loadInputs(ent.getInputs());
 		operadorValido = true;
 	}
-	
+
 	public void reUseResult(Entrada ent){
 		clearAll();
 		mostrador = ent.getRes();
 		expressao.add(new Input("nm", ent.getRes()));
 		operadorValido = true;
 	}
-	
-	public void tempo_exec(Entrada ent){
-		mostrador=Long.toString(ent.getTempo());
-		//mostrador=Long.toString(temp.getStopValue()-temp.getStartValue());
-		/*System.out.println("tempo inicio"+ temp.getStartValue());
-		System.out.println("tempo fim"+ temp.getStopValue());*/
-	/*	this.teste=this.temp.getStopValue()-this.temp.getStartValue();*/
-	} 
 
-	
+	public void tempo(Entrada ent){
+
+		mostrador = ent.getTempo();
+
+	}
+
+
 
 
 	public long getTeste() {
@@ -475,19 +473,19 @@ public class Calc implements Serializable{
 	public String getExp() {
 		return mostrador;
 	}
-	
+
 	public void setExp(String exp) {
 		this.mostrador = exp;
 	}	
-	
+
 	public Estatistica getEst() {
 		return est;
 	}
-	
+
 	public Historico getHist() {
 		return hist;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -503,7 +501,7 @@ public class Calc implements Serializable{
 	public void setGraus(boolean graus) {
 		this.graus = graus;
 	}
-	
+
 	public Cronometro getTemp() {
 		return temp;
 	}
@@ -520,22 +518,6 @@ public class Calc implements Serializable{
 		this.mostrador = mostrador;
 	}
 
-	/*public long getTempo_final() {
-		return tempo_final;
-	}
 
-	public void setTempo_final(long tempo_final) {
-		this.tempo_final = tempo_final;
-	}
-
-	public long getTempo_inicial() {
-		return tempo_inicial;
-	}
-
-	public void setTempo_inicial(long tempo_inicial) {
-		this.tempo_inicial = tempo_inicial;
-	}
-	*/
-	
 
 }
