@@ -34,12 +34,7 @@ public class Calc implements Serializable{
 	private Estatistica est;
 
 	@Inject 
-	private Cronometro temp;
-
-	private long teste=222222;
-	/*private long tempo_inicial;
-	private long tempo_final;*/
-
+	private Cronometro tempo;
 
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido; // indica se é válido usar um operador na expressão
@@ -47,11 +42,6 @@ public class Calc implements Serializable{
 	private boolean parentsisAberto; // indica se existe um parentsis aberto
 	private boolean graus = false;	// indica se os ângulos introduzidos são em radianos (predefinido) ou em graus
 
-	private long tempo_inicial;
-
-	private long tempo_final;
-
-	private long diferencatempo;
 
 	public Calc(){
 		init();		
@@ -181,17 +171,15 @@ public class Calc implements Serializable{
 
 		if(operadorValido && parentsisAberto == false){
 
-			tempo_inicial = System.nanoTime();
-			this.tempo_final = 0;  
-			this.diferencatempo=0;  
-
+			Cronometro.start();
+			
 			String res = opera(mostrador, expressao);
 			if(res.contains("erros") == false){
 				ArrayList<Input> inputs = expressao.getInputs();
 
-				tempo_final=System.nanoTime(); 
-				diferencatempo=(tempo_final-tempo_inicial)/1000;
-				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,Long.toString(diferencatempo)));
+				Cronometro.stop();
+			
+				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,Long.toString(Cronometro.tempoResposta())));
 				mostrador = expressao.clear();
 				mostrador = expressao.add(new Input("nm", res));
 				init();
@@ -455,17 +443,6 @@ public class Calc implements Serializable{
 
 	}
 
-
-
-
-	public long getTeste() {
-		return teste;
-	}
-
-	public void setTeste(long teste) {
-		this.teste = teste;
-	}
-
 	public String getExp() {
 		return mostrador;
 	}
@@ -498,13 +475,6 @@ public class Calc implements Serializable{
 		this.graus = graus;
 	}
 
-	public Cronometro getTemp() {
-		return temp;
-	}
-
-	public void setTemp(Cronometro temp) {
-		this.temp = temp;
-	}
 
 	public String getMostrador() {
 		return mostrador;

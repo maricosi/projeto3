@@ -8,34 +8,34 @@ public class Cronometro implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private static long startValue;  
-	private static long stopValue;  
-	private static long timeDiff;  
+	private static long tempo_inicial;  
+	private static long tempo_final;  
+	private static long diftempo;  
 
 
 	/** 
 	 * Inicia a contagem temporal 
 	 */  
 	public static void start() {  
-		startValue = System.currentTimeMillis();  
-		stopValue = 0;  
-		timeDiff = 0;  
+		tempo_inicial = System.nanoTime();  
+		tempo_final = 0;  
+		diftempo = 0;  
 	}  
 
 	/** 
 	 * Calcula a diferença temporal 
 	 */  
 	public static void stop() {  
-		stopValue = System.currentTimeMillis();  
-		timeDiff = stopValue - startValue;  
+		tempo_final = System.nanoTime();  
+		diftempo = (tempo_final - tempo_inicial)/1000;  
 	}  
 
 	/** 
 	 * Retorna o diferença de tempo medida 
 	 * @return tempo em milisegundos 
 	 */  
-	public static long elapsedTime() {  
-		return timeDiff;  
+	public static long tempoResposta() {  
+		return diftempo;  
 	}  
 
 
