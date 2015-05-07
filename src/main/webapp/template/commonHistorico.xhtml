@@ -11,9 +11,9 @@
 <body>
 	<ui:composition>
 
-		<h:form>
-			<h:dataTable id="items" value="#{calc.hist.entradas}" var="e"
-				border="2">
+		<h:form id="historicoTabela">
+			<h:dataTable  value="#{calc.hist.entradas}" var="e"
+				border="2" >
 				<f:facet name="caption">
 					<h:outputText value="Histórico" />
 				</f:facet>
@@ -35,10 +35,10 @@
 				
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Tempo de Execução" />
+						<h:outputText value="Tempo (&#181;s)" />
 					</f:facet>
 					<h:commandLink action="#{calc.tempo(e)}" value="#{e.tempo}"
-						title="Reutilizar este resultado" />
+						title="Tempo de Execução" />
 				</h:column>
 
 

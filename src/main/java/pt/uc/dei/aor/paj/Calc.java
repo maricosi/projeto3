@@ -181,7 +181,7 @@ public class Calc implements Serializable{
 
 		if(operadorValido && parentsisAberto == false){
 
-			tempo_inicial = System.currentTimeMillis();  
+			tempo_inicial = System.nanoTime();
 			this.tempo_final = 0;  
 			this.diferencatempo=0;  
 
@@ -189,12 +189,8 @@ public class Calc implements Serializable{
 			if(res.contains("erros") == false){
 				ArrayList<Input> inputs = expressao.getInputs();
 
-				tempo_final=System.currentTimeMillis(); 
-				diferencatempo=tempo_final-tempo_inicial;
-
-				System.out.println(tempo_inicial + " - " + tempo_final + " - " + diferencatempo);
-
-
+				tempo_final=System.nanoTime(); 
+				diferencatempo=(tempo_final-tempo_inicial)/1000;
 				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,Long.toString(diferencatempo)));
 				mostrador = expressao.clear();
 				mostrador = expressao.add(new Input("nm", res));
