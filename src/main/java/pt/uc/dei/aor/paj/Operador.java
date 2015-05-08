@@ -6,6 +6,7 @@ public class Operador {
 	
 	private String op;
 	AtomicInteger quant = new AtomicInteger(0);
+	
 	//private int quant = 0;
 	
 	public Operador(String op) {
@@ -24,6 +25,7 @@ public class Operador {
 	public int getQuant() {
 		return quant.get();
 	}
+
 
 		
 }

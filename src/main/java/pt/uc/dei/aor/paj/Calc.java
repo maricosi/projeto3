@@ -33,9 +33,6 @@ public class Calc implements Serializable{
 	@Inject 
 	private Estatistica est;
 
-	@Inject 
-	private Cronometro tempo;
-
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido; // indica se é válido usar um operador na expressão
 	private boolean existeVirgula; // indica se existe uma vírgula na última parte numérica da expressão

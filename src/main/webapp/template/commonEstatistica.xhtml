@@ -20,7 +20,7 @@
 
 				</h:column>
 				<h:column>
-					<f:facet name="header">
+					<f:facet name="header" sortBy="#{op.value.quant}" priority="1">
 						<h:outputText value="Resultado" />
 					</f:facet>
 					<h:outputText value="#{op.value.quant}" />

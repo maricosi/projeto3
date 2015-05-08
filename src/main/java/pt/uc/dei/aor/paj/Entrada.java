@@ -39,14 +39,5 @@ public class Entrada {
 	public ArrayList<Input> getInputs(){
 		return inputs;
 	}
-
-
-	
-
-
-
-
-
-
 	
 }

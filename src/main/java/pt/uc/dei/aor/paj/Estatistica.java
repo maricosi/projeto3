@@ -2,9 +2,13 @@ package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -15,32 +19,34 @@ public class Estatistica implements Serializable{
 	
 	private static final long serialVersionUID = -8382190444479383697L;
 		
-	private HashMap <String, Operador> operation = new HashMap<>();
+	private Map <String, Operador> operation = new TreeMap<>();
 	private List<Entry<String, Operador>> entrada;
 	
+	
 	public Estatistica() {
-		operation.put("+", new Operador("+"));
-		operation.put("-", new Operador("-"));
-		operation.put("/", new Operador("/"));
-		operation.put("*", new Operador("*"));
-		operation.put("sqrt", new Operador("sqrt"));
-		operation.put("+/-", new Operador("+/-"));
-		operation.put("%", new Operador("%"));
-		operation.put("sin", new Operador("sin"));
-		operation.put("cos", new Operador("cos"));
-		operation.put("tan", new Operador("tan"));
-		operation.put("1/x", new Operador("1/x"));
-		operation.put("x^2", new Operador("x^2"));
-		operation.put("^", new Operador("^"));
-		operation.put("pi", new Operador("pi"));
-		operation.put("e", new Operador("e"));
-		operation.put("log10", new Operador("log10"));
-		operation.put("log2", new Operador("log2"));
-		operation.put("log", new Operador("log"));
-		operation.put("!", new Operador("!"));
-		operation.put("cbrt", new Operador("cbrt"));
-		operation.put("e^x", new Operador("e^x"));
-		operation.put("10^x", new Operador("10^x"));
+	
+		operation.put("Adição", new Operador("+"));
+		operation.put("Subtracção", new Operador("-"));
+		operation.put("Divisão", new Operador("/"));
+		operation.put("Multiplicação", new Operador("*"));
+		operation.put("Raiz Quadrada", new Operador("sqrt"));
+		operation.put("Mudança de Sinal", new Operador("+/-"));
+		operation.put("Percentagem", new Operador("%"));
+		operation.put("Seno", new Operador("sin"));
+		operation.put("Coseno", new Operador("cos"));
+		operation.put("Tangente", new Operador("tan"));
+		operation.put("Inverso", new Operador("1/x"));
+		operation.put("Quadrado de um número", new Operador("x^2"));
+		operation.put("Elevado a...", new Operador("^"));
+		operation.put("Pi", new Operador("pi"));
+		operation.put("Exponensial", new Operador("e"));
+		operation.put("Logaritmo base 10", new Operador("log10"));
+		operation.put("Logaritmo base 2", new Operador("log2"));
+		operation.put("Logaritmo ", new Operador("log"));
+		operation.put("Factorial", new Operador("!"));
+		operation.put("Raiz Cúbica", new Operador("cbrt"));
+		operation.put("Exponensial elevado a um valor", new Operador("e^x"));
+		operation.put("Dez elevado a um valor", new Operador("10^x"));
 			
 	}
 	
@@ -51,55 +57,58 @@ public class Estatistica implements Serializable{
 		for (Input input : inputs) {
 			if(input.getTipo().contains("op")){
 				if(input.getConteudo().contains("+"))
-					operation.get("+").add();
+					operation.get("Adição").add();
 				else if(input.getConteudo().contains("-"))
-					operation.get("-").add();
+					operation.get("Subtracção").add();
 				else if(input.getConteudo().contains("*"))
-					operation.get("*").add();
+					operation.get("Multiplicação").add();
 				else if(input.getConteudo().contains("/"))
-					operation.get("/").add();
+					operation.get("Divisão").add();
 				else if(input.getConteudo().contains("sqrt"))
-					operation.get("sqrt").add();
+					operation.get("Raiz Quadrada").add();
 				else if(input.getConteudo().contains("sin"))
-					operation.get("sin").add();
+					operation.get("Seno").add();
 				else if(input.getConteudo().contains("cos"))
-					operation.get("cos").add();
+					operation.get("Coseno").add();
 				else if(input.getConteudo().contains("tan"))
-					operation.get("tan").add();
+					operation.get("Tangente").add();
 				else if(input.getConteudo().contains("log10"))
-					operation.get("log10").add();
+					operation.get("Logaritmo base 10").add();
 				else if(input.getConteudo().contains("log2"))
-					operation.get("log2").add();
+					operation.get("Logaritmo base 2").add();
 				else if(input.getConteudo().contains("log("))
-					operation.get("log").add();
+					operation.get("Logaritmo").add();
 				else if(input.getConteudo().contains("!"))
-					operation.get("!").add();
+					operation.get("Factorial").add();
 				else if(input.getConteudo().contains("cbrt"))
-					operation.get("cbrt").add();
+					operation.get("Raíz Cúbica").add();
 				else if(input.getConteudo().contains("e^"))
-					operation.get("e^x").add();					
+					operation.get("Exponensial elevado a um valor").add();					
 				else if(input.getConteudo().contains("10^"))
-					operation.get("10^x").add();
+					operation.get("Dez elavado a um valor").add();
 				else if(input.getConteudo().contains("^"))
-					operation.get("^").add();
+					operation.get("Elevado a...").add();
 			}
+			
+		
 		}
+		
 		
 	}
 	
 	public void recolheInput(Input in){
 		if(in.getTipo().contains("+/-"))
-			operation.get("+/-").add();
+			operation.get("Mudança de Sinal").add();
 		else if(in.getTipo().contains("%"))
-			operation.get("%").add();
+			operation.get("Percentagem").add();
 		else if(in.getTipo().contains("1/x"))
-			operation.get("1/x").add();
+			operation.get("Inverso").add();
 		else if(in.getTipo().contains("x^2"))
-			operation.get("x^2").add();
+			operation.get("Quadrado de um número").add();
 		else if(in.getTipo().contains("pi"))
-			operation.get("pi").add();
+			operation.get("Pi").add();
 		else if(in.getTipo().contains("e"))
-			operation.get("e").add();
+			operation.get("Exponensial").add();
 	}
 
 	public List<Entry<String, Operador>> getEntrada() {
