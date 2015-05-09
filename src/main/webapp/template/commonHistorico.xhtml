@@ -10,7 +10,10 @@
 </h:head>
 <body>
 	<ui:composition>
-
+		<h:form> 
+			<h:commandButton name="Limpar" action="#{calc.hist.limpaEntrada}" value="Limpa Historico"></h:commandButton>
+		
+		</h:form>
 		<h:form id="historicoTabela">
 			<h:dataTable  value="#{calc.hist.entradas}" var="e"
 				border="2" >

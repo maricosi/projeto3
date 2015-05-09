@@ -6,7 +6,10 @@
 
 <h:head></h:head> 
 <body> 
-
+<h:form> 
+			<h:commandButton name="Limpar" action="#{calc.est.limpaEstatistica}" value="Limpa Estatistica"></h:commandButton>
+		
+		</h:form>
 			<h:dataTable id="estatisticaTabela" value="#{calc.est.entrada}" var="op"
 				border="2" >
 				<f:facet name="caption">
@@ -19,8 +22,8 @@
 					<h:outputText value="#{op.key}" />
 
 				</h:column>
-				<h:column>
-					<f:facet name="header" sortBy="#{op.value.quant}" priority="1">
+				<h:column sortBy="#{op.value.quant}">
+					<f:facet name="header" >
 						<h:outputText value="Resultado" />
 					</f:facet>
 					<h:outputText value="#{op.value.quant}" />

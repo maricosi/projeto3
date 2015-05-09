@@ -22,6 +22,8 @@ public class Historico implements Serializable {
 		return entradas;
 	}
 
-	
+	public void limpaEntrada() {
+		entradas.clear();
+	}
 	
 }
