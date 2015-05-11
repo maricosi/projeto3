@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+     >
 
 
 	
@@ -10,40 +10,40 @@
 
 
  <h:head>
+ 
+ 
+ <h:form rendered="#{!login.logged}">
+				<h1>Login</h1>
+				<h:inputText id="username" title="Nome: " value="#{login.name}"
+					required="true" requiredMessage="Erro: Escreva o seu username."
+					maxlength="25" />
+				<p></p>
+				<h:commandButton id="Validar" value="Validar" action="/index" />
+				<h:commandButton id="apagar" value="Apagar" type="reset" />
+			</h:form>
+
+
+			<div class="messagecolor">
+				<h:messages showSummary="true" showDetail="false"
+					errorStyle="color: #d20005" infoStyle="color: blue" />
+			</div>
+			<h1>
+				<h:outputText value="Benvindo #{login.name}!!"
+					rendered="#{login.logged}" />
+			</h1>
+			<h:form rendered="#{login.logged}">
+
+				<h:commandButton id="Logout" value="Logout" action="#{login.logout}" />
+				<p></p>
+			</h:form>
         <title>Chat test!</title>
         <h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <script type="text/javascript">
-        setInterval("nextMessage()", 200); //update the chart every 200 ms               
-         
-        function updateMessages(xhr, status, args) {
-            if(!args.ok) return;
-            $('#chat').append('<div class="msg">[' +args.dateSent+ '] <strong>'+args.user+'</strong>: '+args.text+'</div>');
-        }
+       
          
     </script>
     <h:body>
-        <h:form prependId="false">
-        
-            <h:panelGrid columns="2">
-            
-                Name: <p:inputText value="#{mensagemControlo.message.user}"/>
-                Text: <p:inputText value="#{mensagemControlo.message.message}"/>
-                <h:commandButton type="reset" value="Clear" />
-                      
-                <h:commandButton id="send" value="Send!">
-                
-                <f:ajax event="click" listener="#{mensagemControlo.sendMessage}" />
-                </h:commandButton>
-            </h:panelGrid>
- 
-            <p:remoteCommand name="nextMessage" actionListener="#{mensagemControlo.firstUnreadMessage}"
-                             oncomplete="updateMessages(xhr, status, args);"/>
-        </h:form>
-        <hr/>
-        <h:form>
-        <h3>Live chat</h3>
-        <div id="chat"></div>
-        </h:form>
+       
 </h:body>
 </html>

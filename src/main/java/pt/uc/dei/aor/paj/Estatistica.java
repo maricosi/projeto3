@@ -2,117 +2,143 @@ package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.Collections;
+
 
 import javax.enterprise.context.ApplicationScoped;
 
-
 @ApplicationScoped
-public class Estatistica implements Serializable{
-	
-	
+public class Estatistica implements Serializable {
+
 	private static final long serialVersionUID = -8382190444479383697L;
-		
-	private Map <String, Operador> operation = new TreeMap<>();
-	private List<Entry<String, Operador>> entrada;
-	
-	
+
+	private ArrayList <Operador> operation = new ArrayList<>();
+
+
 	public Estatistica() {
-	
-		operation.put("Adição", new Operador("+"));
-		operation.put("Subtracção", new Operador("-"));
-		operation.put("Divisão", new Operador("/"));
-		operation.put("Multiplicação", new Operador("*"));
-		operation.put("Raiz Quadrada", new Operador("sqrt"));
-		operation.put("Mudança de Sinal", new Operador("+/-"));
-		operation.put("Percentagem", new Operador("%"));
-		operation.put("Seno", new Operador("sin"));
-		operation.put("Coseno", new Operador("cos"));
-		operation.put("Tangente", new Operador("tan"));
-		operation.put("Inverso", new Operador("1/x"));
-		operation.put("Quadrado de um número", new Operador("x^2"));
-		operation.put("Elevado a...", new Operador("^"));
-		operation.put("Pi", new Operador("pi"));
-		operation.put("Exponensial", new Operador("e"));
-		operation.put("Logaritmo base 10", new Operador("log10"));
-		operation.put("Logaritmo base 2", new Operador("log2"));
-		operation.put("Logaritmo ", new Operador("log"));
-		operation.put("Factorial", new Operador("!"));
-		operation.put("Raiz Cúbica", new Operador("cbrt"));
-		operation.put("Exponensial elevado a um valor", new Operador("e^x"));
-		operation.put("Dez elevado a um valor", new Operador("10^x"));
-			
-	}
-	
-	public void recolheEstatistica(Expressao exp){
-		
-		ArrayList<Input> inputs = exp.getInputs();
-		
-		for (Input input : inputs) {
-			if(input.getTipo().contains("op")){
-				if(input.getConteudo().contains("+"))
-					operation.get("Adição").add();
-				else if(input.getConteudo().contains("-"))
-					operation.get("Subtracção").add();
-				else if(input.getConteudo().contains("*"))
-					operation.get("Multiplicação").add();
-				else if(input.getConteudo().contains("/"))
-					operation.get("Divisão").add();
-				else if(input.getConteudo().contains("sqrt"))
-					operation.get("Raiz Quadrada").add();
-				else if(input.getConteudo().contains("sin"))
-					operation.get("Seno").add();
-				else if(input.getConteudo().contains("cos"))
-					operation.get("Coseno").add();
-				else if(input.getConteudo().contains("tan"))
-					operation.get("Tangente").add();
-				else if(input.getConteudo().contains("log10"))
-					operation.get("Logaritmo base 10").add();
-				else if(input.getConteudo().contains("log2"))
-					operation.get("Logaritmo base 2").add();
-				else if(input.getConteudo().contains("log("))
-					operation.get("Logaritmo").add();
-				else if(input.getConteudo().contains("!"))
-					operation.get("Factorial").add();
-				else if(input.getConteudo().contains("cbrt"))
-					operation.get("Raíz Cúbica").add();
-				else if(input.getConteudo().contains("e^"))
-					operation.get("Exponensial elevado a um valor").add();					
-				else if(input.getConteudo().contains("10^"))
-					operation.get("Dez elavado a um valor").add();
-				else if(input.getConteudo().contains("^"))
-					operation.get("Elevado a...").add();
-			}
-			
-		
-		}
-		
-		
-	}
-	
-	public void recolheInput(Input in){
-		if(in.getTipo().contains("+/-"))
-			operation.get("Mudança de Sinal").add();
-		else if(in.getTipo().contains("%"))
-			operation.get("Percentagem").add();
-		else if(in.getTipo().contains("1/x"))
-			operation.get("Inverso").add();
-		else if(in.getTipo().contains("x^2"))
-			operation.get("Quadrado de um número").add();
-		else if(in.getTipo().contains("pi"))
-			operation.get("Pi").add();
-		else if(in.getTipo().contains("e"))
-			operation.get("Exponensial").add();
+
+		operation.add( new Operador("+","Adição"));
+		operation.add( new Operador("-","Subtracção"));
+		operation.add( new Operador("/","Divisão"));
+		operation.add( new Operador("*","Multiplicação"));
+		operation.add( new Operador("sqrt","Multiplicação"));
+		operation.add( new Operador("+/-" ,"Mudança de Sinal"));
+		operation.add( new Operador("%","Percentagem"));
+		operation.add( new Operador("sin","Seno"));
+		operation.add( new Operador("cos","Coseno"));
+		operation.add( new Operador("tan","Tangente"));
+		operation.add( new Operador("1/x","Inverso"));
+		operation.add( new Operador("x^2","Quadrado de um número"));
+		operation.add( new Operador("^","Elevado a..."));
+		operation.add( new Operador("pi","Pi"));
+		operation.add( new Operador("e","Exponensial"));
+		operation.add( new Operador("log10","Logaritmo base 10"));
+		operation.add( new Operador("log2","Logaritmo base 2"));
+		operation.add( new Operador("log","Logaritmo"));
+		operation.add( new Operador("!","Factorial"));
+		operation.add( new Operador("cbrt","Raiz Cúbica"));
+		operation.add( new Operador("e^x","Exponensial elevado a um valor"));
+		operation.add( new Operador("10^x","Dez elevado a um valor"));
+
 	}
 
-	public List<Entry<String, Operador>> getEntrada() {
-		entrada = new ArrayList<Entry<String, Operador>>(operation.entrySet());
-		return entrada;
+	private Operador getOperador(String op){
+
+		for(Operador ops:operation){
+			if(ops.getOp().equals(op)){
+				return ops;
+			}
+		}
+
+		return null;
+	}
+
+	public void recolheEstatistica(Expressao exp) {
+
+		ArrayList<Input> inputs = exp.getInputs();
+
+		for (Input input : inputs) {
+			if (input.getTipo().contains("op")) {
+				if (input.getConteudo().contains("+")){
+					getOperador("+").add();
+				}
+				else if (input.getConteudo().contains("-")){
+					getOperador("-").add();
+				}
+
+				else if (input.getConteudo().contains("*")){
+					getOperador("*").add();
+				}
+				else if (input.getConteudo().contains("/")){
+					getOperador("/").add();
+				}
+				else if (input.getConteudo().contains("sqrt")){
+					getOperador("sqrt").add();
+				}
+				else if (input.getConteudo().contains("sin")){
+					getOperador("sin").add();
+				}
+				else if (input.getConteudo().contains("cos")){
+					getOperador("cos").add();
+				}
+				else if (input.getConteudo().contains("tan")){
+					getOperador("tan").add();
+				}
+				else if (input.getConteudo().contains("log10")){
+					getOperador("log10").add();
+				}
+				else if (input.getConteudo().contains("log2")){
+					getOperador("log2").add();
+				}
+				else if (input.getConteudo().contains("log(")){
+					getOperador("log").add();
+				}
+				else if (input.getConteudo().contains("!")){
+					getOperador("!").add();
+				}
+				else if (input.getConteudo().contains("cbrt")){
+					getOperador("cbrt").add();
+				}
+				else if (input.getConteudo().contains("e^")){
+					getOperador("e^x").add();
+				}
+				else if (input.getConteudo().contains("10^")){
+					getOperador("10^x").add();
+				}
+				else if (input.getConteudo().contains("^")){
+					getOperador("^").add();
+				}
+			}
+
+		}
+
+	}
+
+	public void recolheInput(Input in) {
+		if (in.getTipo().contains("+/-")){
+			getOperador("+/-").add();
+		}
+		else if (in.getTipo().contains("%")){
+			getOperador("%").add();
+		}
+		else if (in.getTipo().contains("1/x")){
+			getOperador("1/x").add();
+		}
+		else if (in.getTipo().contains("x^2")){
+			getOperador("x^2").add();
+		}
+		else if (in.getTipo().contains("pi")){
+			getOperador("pi").add();
+		}
+		else if (in.getTipo().contains("e")){
+			getOperador("e").add();
+		}
+	}
+
+
+
+	public ArrayList <Operador> getEntrada() {
+		Collections.sort(operation);
+		return operation;
 	}
 }

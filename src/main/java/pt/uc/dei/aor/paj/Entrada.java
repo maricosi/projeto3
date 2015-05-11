@@ -29,8 +29,6 @@ public class Entrada {
 	}
 	
 
-
-
 	public String getTempo() {
 		return tempo;
 	}

@@ -12,6 +12,7 @@
 <body>
 	<ui:composition template="template/commonLayout.xhtml">
 		<ui:define name="content">
+
 			<h:form>
 				<div id="calculadora">
 					<table class="numerosOperacoes">
@@ -20,13 +21,15 @@
 									styleClass="ecranCientifica" disabled="true" id="mostrador" /></td>
 						</tr>
 						<tr>
-							<td colspan="4"><h:selectOneRadio id="graus"
-									styleClass="graus" value="#{calc.graus}">
-									<f:selectItem itemValue="false" itemLabel="Radianos"
-										itemDescription="Usar graus" />
-									<f:selectItem itemValue="true" itemLabel="Graus"
-										itemDescription="Usar radianos" />
-								</h:selectOneRadio></td>
+							<f:ajax render="mostrador">
+								<td colspan="4"><h:selectOneRadio id="graus"
+										styleClass="graus" value="#{calc.graus}">
+										<f:selectItem itemValue="false" itemLabel="Radianos"
+											itemDescription="Usar graus" />
+										<f:selectItem itemValue="true" itemLabel="Graus"
+											itemDescription="Usar radianos" />
+									</h:selectOneRadio></td>
+							</f:ajax>
 						</tr>
 						<tr>
 							<td colspan="2"><h:commandButton styleClass="buttons red"
