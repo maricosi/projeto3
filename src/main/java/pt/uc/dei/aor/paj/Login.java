@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -21,7 +21,8 @@ public class Login implements Serializable {
 	//	@Inject Mensagem chat;
 	@Inject Verificacaologin verifica;
 	//conjunto de utilizadores inscritos
-	private ArrayList<Verificacaologin> utilizadores;
+	
+	private Utilizador utilizadores;
 	//2 utilizadores inscritos por defeito
 
 	//private int numTentativas;
