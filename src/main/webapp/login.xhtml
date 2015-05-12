@@ -23,7 +23,9 @@
 				</tr>
 			</table>
 			<p>
-				<h:commandButton value="Login" action="#{login.logar}" />
+				<h:commandButton styleClass="btnLogin" tabindex="4" value="Login" action="#{login.logar}">
+					<f:ajax execute="idUsr idPsw" render="saidaLogin" />
+				</h:commandButton>
 			</p>
 			 <h3>
 				<h:outputText id="out" value="#{login.mensagem}" />
@@ -31,6 +33,28 @@
 			<br />
 			<h:commandButton value="Registo" action="#{login.novoUtilizador}" />
 		</h:form> 
+		
+		<h2>Novo Utilizador</h2>
+				<br />
+				<h:form prependId="false">
+					<h:outputText value="Utilizador: " />
+					<h:inputText value="#{login.user}" id="novoUsr" />
+					<br />
+					<h:outputText value="Password:" />
+					<h:inputSecret value="#{login.password}" id="novaPsw" />
+					<h:commandButton value="Registar" action="#{login.novoUtilizador}">
+						<f:ajax execute="novoUsr novaPsw" render="registo" />
+					</h:commandButton>
+					<br />
+					<h2>
+						<h:outputText value="#{login.mensagem}" id="registo" />
+					</h2>
+				</h:form>
+				
+				<div class="errorMessage">
+					<h:messages showSummary="true" showDetail="false"
+						errorStyle="color: #d20005" infoStyle="color: blue" />
+				</div>
 	</div>
 </body>
 </html>
