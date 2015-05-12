@@ -4,6 +4,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
+
+<h:head>
+	<h:outputScript library="js" name="script.js" />
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
 <body>
 	<ui:composition>
 		<h:dataTable id="estatisticaTabela" value="#{calc.est.entrada}"

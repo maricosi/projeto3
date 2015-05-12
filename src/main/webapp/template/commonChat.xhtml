@@ -5,10 +5,28 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+	<h:outputScript library="js" name="script.js" />
 	<h:outputStylesheet library="css" name="style.css" />
 
 </h:head>
 <body>
-	
+	<aside id="aside">
+		<div id="logout">
+			<h:form>
+				<h1>#{login.mensagem}!!</h1>
+				<h:commandButton id="Logout" value="Logout" action="#{login.logout}" />
+				<f:ajax execute="Refresh" render="out">
+					<h:commandButton id="btn-refresh" style="display:none;" />
+				</f:ajax>
+				<p></p>
+			</h:form>
+
+		</div>
+		<div id="chat">
+		
+		
+		</div>
+
+	</aside>
 </body>
 </html>
