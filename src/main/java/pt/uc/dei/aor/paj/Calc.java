@@ -32,8 +32,8 @@ public class Calc implements Serializable{
 
 	@Inject 
 	private Estatistica est;
-	@Inject
-	private Login login;
+	/*@Inject
+	private Login login;*/
 	
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido; // indica se é válido usar um operador na expressão

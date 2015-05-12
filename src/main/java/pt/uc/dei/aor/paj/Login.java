@@ -21,8 +21,8 @@ public class Login implements Serializable {
 	//	@Inject Mensagem chat;
 	@Inject Verificacaologin verifica;
 	//conjunto de utilizadores inscritos
-	
-	private Utilizador utilizadores;
+	private ArrayList <Verificacaologin> utilizadores;
+	//private Utilizador utilizadores;
 	//2 utilizadores inscritos por defeito
 
 	//private int numTentativas;
