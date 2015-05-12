@@ -13,26 +13,24 @@
 			<table>
 				<tr>
 					<td>Name:</td>
-					<td><h:inputText id="nome" binding="#{login.nameText}"
-							value="#{login.name}" /></td>
+					<td><h:inputText id="nome" 
+							value="#{login.user}" /></td>
 				</tr>
 				<tr>
 					<td>Password:</td>
 					<td><h:inputSecret id="password"
-							binding="#{login.passwordText}" value="#{login.password}" /></td>
+							 value="#{login.password}" /></td>
 				</tr>
 			</table>
 			<p>
-				<h:commandButton value="Login">
-					<f:ajax execute="name password" render="out" />
-				</h:commandButton>
+				<h:commandButton value="Login" action="#{login.logar}" />
 			</p>
-			<h3>
-				<h:outputText id="out" value="#{login.message}" />
+			 <h3>
+				<h:outputText id="out" value="#{login.mensagem}" />
 			</h3>
 			<br />
-			<h:commandButton value="Registo" action="#{login.option1}" />
-		</h:form>
+			<h:commandButton value="Registo" action="#{login.novoUtilizador}" />
+		</h:form> 
 	</div>
 </body>
 </html>
