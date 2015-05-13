@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class Login implements Serializable {
 
 	private static final long serialVersionUID = -2921010109456538382L;
@@ -22,13 +22,12 @@ public class Login implements Serializable {
 	@Inject Verificacaologin verifica;
 	//conjunto de utilizadores inscritos
 	private ArrayList <Verificacaologin> utilizadores;
-	//private Utilizador utilizadores;
 	//2 utilizadores inscritos por defeito
 
 	//private int numTentativas;
 	private String user, password, mensagem;
 	//variável auxiliar que vai ficar true quando o utilizador fica logado
-	private boolean isLogged=false;
+	//private boolean isLogged=false;
 
 	//construtor cria a ArrayList dos utilizadores e acrescenta os dois por defeito
 	
@@ -105,18 +104,24 @@ public class Login implements Serializable {
 
 		//if (this.numTentativas<=3){
 
-		if(verifyPass(this.password, this.user)){
+		if(verifyPass(this.password, this.user)&& !verifica.isLogged()){
 			this.mensagem = "Bem Vindo ao Sistema "+this.user+"!";
 			//	chat.setUtilizador(this.user);
 			this.user="";
 			this.password="";
-			isLogged=true;
-			verifica.setLogged(isLogged);
+			verifica.setLogged(true);
 			//				this.numTentativas=0;
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + "/basic.xhtml");
 			return "basic.xhtml";
-
+		}else if(verifyPass(this.password, this.user)&& verifica.isLogged()){
+			this.mensagem = "Utilizador já tem uma sessão ligada!";
+			this.user="";
+			this.password="";
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
+			return "login.xhtml";
+			
 		}else {
 			//	this.numTentativas++;
 		
@@ -130,9 +135,11 @@ public class Login implements Serializable {
 	}
 
 	public void logout() throws IOException {
-		this.isLogged = false;
+		
+		verifica.setLogged(false);
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-		ec.invalidateSession();
+		//ec.invalidateSession();
+		mensagem="";
 		ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
 	}	
 
