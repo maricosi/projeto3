@@ -13,9 +13,9 @@
 	<aside id="aside">
 		<div id="logout">
 			<h:form>
-				<h1>#{login.mensagem}!!</h1>
-				<h:commandButton id="Logout" value="Logout" action="#{login.logout}" />
-				<f:ajax execute="Refresh" render="out">
+				<h1>Benvindo #{login.user}!!</h1>
+				<h:commandButton id="Logout" value="Logout" action="#{login.logout(login.user)}" />
+				<f:ajax execute="Refresh" render="out historico">
 					<h:commandButton id="btn-refresh" style="display:none;" />
 				</f:ajax>
 				<p></p>

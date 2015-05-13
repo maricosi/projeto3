@@ -34,7 +34,7 @@ public class Calc implements Serializable{
 	private Estatistica est;
 	/*@Inject
 	private Login login;*/
-	
+
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido; // indica se é válido usar um operador na expressão
 	private boolean existeVirgula; // indica se existe uma vírgula na última parte numérica da expressão
@@ -171,13 +171,13 @@ public class Calc implements Serializable{
 		if(operadorValido && parentsisAberto == false){
 
 			Cronometro.start();
-			
+
 			String res = opera(mostrador, expressao);
 			if(res.contains("erros") == false){
 				ArrayList<Input> inputs = expressao.getInputs();
 
 				Cronometro.stop();
-			
+
 				hist.adicionaEntrada(new Entrada(mostrador, res, inputs,Long.toString(Cronometro.tempoResposta())));
 				mostrador = expressao.clear();
 				mostrador = expressao.add(new Input("nm", res));
@@ -369,39 +369,48 @@ public class Calc implements Serializable{
 
 		// end
 
-		Expression e = new ExpressionBuilder(exp)
-		.function(cosd)
-		.function(sind)
-		.function(tand)
-		.operator(factorial)
-		.variables("pi", "e")
-		.build()
-		.setVariable("pi", Math.PI)
-		.setVariable("e", Math.E);
+		try{
+			Expression e = new ExpressionBuilder(exp)
 
-		if(e.validate().isValid()){
-			try {
-				res = e.evaluate();			
-				if(res%1 != 0)		
-					out = Double.toString(res);
-				else if (Double.toString(res).endsWith(".0")){
-					out = Double.toString(res);
-					out = out.substring(0, out.length()-2);					
-				} else out = Double.toString(res);
-				est.recolheEstatistica(inputs);		
-			} catch (Exception e1) {
-				out="erros na expressao";			
-			}
 
-		} else {
-			out = "erros na expressao:\n";
-			List<String> erros = e.validate().getErrors();
 
-			for (String string : erros) {
-				out += string + "\n";
-				System.out.println(string);
-			}
-		}						
+
+			.function(cosd)
+			.function(sind)
+			.function(tand)
+			.operator(factorial)
+			.variables("pi", "e")
+			.build()
+			.setVariable("pi", Math.PI)
+			.setVariable("e", Math.E);
+
+			if(e.validate().isValid()){
+				try {
+					res = e.evaluate();			
+					if(res%1 != 0)		
+						out = Double.toString(res);
+					else if (Double.toString(res).endsWith(".0")){
+						out = Double.toString(res);
+						out = out.substring(0, out.length()-2);					
+					} else out = Double.toString(res);
+					est.recolheEstatistica(inputs);		
+				} catch (Exception e1) {
+					out="erros na expressao";			
+				}
+
+			} else {
+				out = "erros na expressao:\n";
+				List<String> erros = e.validate().getErrors();
+
+				for (String string : erros) {
+					out += string + "\n";
+					System.out.println(string);
+				}
+			}						
+			
+		} catch (Exception e2){
+			out=e2.getMessage();
+		}
 		return out;
 	}
 
