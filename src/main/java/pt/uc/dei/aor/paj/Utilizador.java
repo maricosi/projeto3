@@ -1,58 +1,68 @@
 package pt.uc.dei.aor.paj;
 
 
-
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.enterprise.context.ApplicationScoped;
 
 
 @ApplicationScoped
-public class Utilizador {
+public class Utilizador implements Serializable {
 
-	private ArrayList<Utilizador> utilizadores;
-	private String username;
-	private String password;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Login> utilizadores;
 
-	
-	public ArrayList<Utilizador> getUtilizadores() {
-		return utilizadores;
-	}
 
-	public void setUtilizadores(ArrayList<Utilizador> utilizadores) {
-		this.utilizadores = utilizadores;
-	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Utilizador(ArrayList<Utilizador> utilizadores) {
+	public Utilizador() {
 		super();
-		this.utilizadores = utilizadores;
+		this.utilizadores = new ArrayList<Login>();
+		utilizadores.add(new Login("Rita","123"));
+		utilizadores.add(new Login("Marisa","456"));
 	}
 
 	//verifica se o utilizador com aquele username já existe ou nao
 	public boolean verifyPass(String pass, String username){
 		boolean existe=false;
-		for(Utilizador p:utilizadores){
-			if(p.getUsername().equals(username) && p.getPassword().equals(pass))
+		for(Login p:utilizadores){
+			if(p.getUser().equals(username) && p.getPassword().equals(pass))
 				existe=true;
 		}
 		return existe;
 	}
+	
+	public boolean verifyUser(String username){
+		boolean existe=false;
+		for(Login p:utilizadores){
+			if(p.getUser().equals(username))
+				existe=true;
+		}
+		return existe;
+	}
+
+	//Acrescenta novo utilizador caso não exista
+	public boolean novoUtilizador(String pass, String username){
+		boolean existe=false;
+		boolean novoUtilizador=false;
+
+		existe=verifyUser(username);
+		if (!existe){
+			utilizadores.add(new Login(username,pass));
+			novoUtilizador=true;
+			
+		}else if(existe){
+			novoUtilizador=false;
+		}
+		
+		return novoUtilizador;
+	}
+
+
+
+
 
 }

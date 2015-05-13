@@ -31,6 +31,8 @@ public class Login implements Serializable {
 	private boolean isLogged=false;
 
 	//construtor cria a ArrayList dos utilizadores e acrescenta os dois por defeito
+	
+	
 	public Login() {
 		super();
 		this.utilizadores = new ArrayList<Verificacaologin>();
@@ -43,6 +45,12 @@ public class Login implements Serializable {
 		this.utilizadores.add(ut1);
 		this.utilizadores.add(ut2);
 		//this.numTentativas=0;
+	}
+
+	public Login(String user, String password) {
+		super();
+		this.user = user;
+		this.password = password;
 	}
 
 	public void setUser(String user) {
