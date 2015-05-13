@@ -15,6 +15,24 @@ public class Verificacaologin implements Serializable {
 	private boolean isLogged;
 
 
+	public Verificacaologin() {
+		super();
+		this.username = "";
+		this.password = "";
+		this.isLogged=false;
+	}
+	
+	
+	
+	public Verificacaologin(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.isLogged = false;
+	}
+
+
+
 	public boolean isLogged() {
 		return isLogged;
 	}
@@ -23,12 +41,7 @@ public class Verificacaologin implements Serializable {
 		this.isLogged = isLogged;
 	}
 
-	public Verificacaologin() {
-		super();
-		this.username = "";
-		this.password = "";
-		this.isLogged=false;
-	}
+
 
 	public String getUsername() { 
 		return username; 

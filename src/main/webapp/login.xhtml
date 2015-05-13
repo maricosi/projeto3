@@ -31,7 +31,7 @@
 				<h:outputText id="out" value="#{login.mensagem}" />
 			</h2>
 			<br />
-			<h:commandButton value="Registo" action="#{login.novoUtilizador}" />
+			<h:commandButton value="Registo" action="#{login.novoUser}" />
 			<f:ajax execute="Refresh" render="out mostrador historicoTabela">
 				<h:commandButton id="btn-refresh" style="display:none;" />
 			</f:ajax>
@@ -46,7 +46,7 @@
 			<br />
 			<h:outputText value="Password:" />
 			<h:inputSecret value="#{login.password}" id="novaPsw" />
-			<h:commandButton value="Registar" action="#{login.novoUtilizador}">
+			<h:commandButton value="Registar" action="#{login.novoUser}">
 				<f:ajax execute="novoUsr novaPsw" render="registo" />
 			</h:commandButton>
 			
