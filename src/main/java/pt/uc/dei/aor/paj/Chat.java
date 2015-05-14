@@ -27,7 +27,7 @@ public class Chat implements Serializable{
 	public Chat() {
 		super();
 		this.conversa = new LinkedList<String>();
-		this.conversa.add("Ola");
+		this.conversa.add("");
 	}
 
 	public LinkedList<String> getConversa() {
