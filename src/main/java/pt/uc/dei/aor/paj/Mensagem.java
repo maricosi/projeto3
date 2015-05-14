@@ -46,7 +46,7 @@ public class Mensagem implements Serializable{
 	}
 	public void setDate() {
 		Date hora = new Date();
-		SimpleDateFormat formatador = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat formatador = new SimpleDateFormat("dd MMM, HH:mm");
 		this.date=formatador.format(hora)+"";
 	}
 	public void setDataMsg(String dt) {

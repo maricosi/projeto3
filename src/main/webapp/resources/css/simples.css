@@ -12,6 +12,7 @@
 #ninja_dir {
 	float: right;
 	display: inline-block;
+	visibility: hidden;
 }
 
 body {
@@ -106,21 +107,18 @@ h1 {
 	font-size: 12px;
 	font-family: verdana;
 	color: Wheat;
-	font-weight: bold;
-	padding: 0px;
+	font-weight: bold
 }
 
 #content {
 	display: inline-table;
 }
 
-
-
 /* Numero e operações*/
 .numerosOperacoes {
 	text-align: left;
-	height: 425px;
-	width: 516px;
+	height: 430px;
+	width: 260px;
 	margin-left: auto;
 	margin-right: auto;
 	/* background-color: #3d4543; */
@@ -130,6 +128,8 @@ h1 {
 	border-radius: 20px;
 	box-shadow: 4px 5px 0px #333300;
 	margin-bottom: 20px;
+	background-color: #333300;
+	width: 255px;
 }
 
 #basica {
@@ -143,9 +143,9 @@ h1 {
 .ecran {
 	margin-left: 5px;
 	margin-right:5px;
-	margin-top:5px;  
-	height : 50px; 
-	width : 490px;
+	margin-top:5px; 
+	height: 50px;
+	width: 220px;
 	font-size: 18px;
 	text-align: right;
 	border-width: 6px;
@@ -157,13 +157,7 @@ h1 {
 	font-style: normal;
 	background-color: #E1E1E1;
 	font-family: Verdana;
-	height: 50px;
-	width: 490px;
 }
-
-
-
-
 
 td {
 	padding: 5px;
@@ -171,8 +165,8 @@ td {
 	font-family: Verdana;
 }
 
-#linha {
-	width: 220px;
+#linha{
+	width:220px;
 	height: 23px;
 }
 

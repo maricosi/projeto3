@@ -40,11 +40,30 @@ public class Calc implements Serializable{
 	private boolean existeVirgula; // indica se existe uma vírgula na última parte numérica da expressão
 	private boolean parentsisAberto; // indica se existe um parentsis aberto
 	private boolean graus = false;	// indica se os ângulos introduzidos são em radianos (predefinido) ou em graus
+	//duarte
+	private boolean simples;
 
 
 	public Calc(){
+		simples=true;
 		init();		
 	}	
+	
+	//duarte
+	public boolean isSimples() {
+		return simples;
+	}
+
+	public void setSimples(boolean simples) {
+		this.simples = simples;
+	}
+
+	public String css(){
+		if(simples){
+			return "simples.css";
+		}
+		return "style.css";
+	}
 
 	public void read(ActionEvent evento){
 
