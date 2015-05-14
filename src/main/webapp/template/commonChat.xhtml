@@ -12,29 +12,29 @@
 <body>
 	<aside id="aside">
 		<div id="logout">
-<<<<<<< HEAD
-			<h:form id="chat">
+
+			<h:form id="benvindo">
 				<h1>Benvindo #{login.user}!!</h1>
-				<h:commandButton id="Logout" value="Logout"
+				<h:commandButton id="logout" value="Logout"
 					action="#{login.logout(login.user)}" />
-				
-				<h:commandButton id="btn-refresh" >
+				<h:commandButton id="btn-refresh">
 					<f:ajax render="out estatisticaTabela" />
 				</h:commandButton>
-				
-=======
-			<h:form>
-				<h1>Benvindo #{login.user}!!</h1>
-				<h:commandButton id="Logout" value="Logout" action="#{login.logout(login.user)}" />
-				<f:ajax execute="Refresh" render="out historico">
-					<h:commandButton id="btn-refresh" style="display:none;" />
-				</f:ajax>
->>>>>>> branch 'master' of https://github.com/maricosi/projeto3
 				<p></p>
 			</h:form>
 
 		</div>
-		<div id="chat"></div>
+		<div id="chat">
+			<h:form prependId="false">
+				<h:outputText value="#{chat.conversa}" id="saidaConversa"
+					style="text-align:left;" />
+				<h:inputText value="#{mensagem.txt}" id="idTxt"
+					styleClass="boxlogin" />
+				<f:ajax event="click" execute="idTxt send" render="saidaConversa"
+					listener="#{chat.actualizar}">
+					<h:commandButton id="send" value="Send"></h:commandButton>
+				</f:ajax>
+		</div>
 
 	</aside>
 </body>
