@@ -14,6 +14,17 @@
 <body>
 	<ui:insert name="chat">
 		<ui:include src="template/commonChat.xhtml" />
+		
+		<h:form prependId="false">
+            <h:outputText value="#{chat.conversa}" id="saidaConversa" style="text-align:left;"/>
+			<h:inputText value="#{mensagem.txt}" id="idTxt" styleClass="boxlogin" />
+			<f:ajax event="click" execute="idTxt send" render="saidaConversa"
+					listener="#{chat.actualizar}">
+			<h:commandButton id="send" value="Send"></h:commandButton>
+			</f:ajax>
+		</h:form>
+
+      
 	</ui:insert>
 </body>
 </html>
