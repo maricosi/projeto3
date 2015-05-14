@@ -19,8 +19,8 @@ import javax.inject.Named;
 public class Login implements Serializable {
 
 	private static final long serialVersionUID = -2921010109456538382L;
-
-	//	@Inject Mensagem chat;
+	
+		@Inject Mensagem chat;
 	@Inject 
 	Verificacaologin verifica;
 	//conjunto de utilizadores inscritos
@@ -39,6 +39,33 @@ public class Login implements Serializable {
 	public Login() {
 		super();
 		
+		this.utilizadores = new ArrayList<Verificacaologin>();
+		Verificacaologin ut1=new Verificacaologin();
+		Verificacaologin ut2=new Verificacaologin();
+		ut1.setUsername("XXX");
+		ut1.setPassword("123");
+		ut2.setUsername("Mar");
+		ut2.setPassword("456");
+		this.utilizadores.add(ut1);
+		this.utilizadores.add(ut2);
+		this.utilizadores = new ArrayList<Verificacaologin>();
+		Verificacaologin ut1=new Verificacaologin();
+		Verificacaologin ut2=new Verificacaologin();
+		ut1.setUsername("XXX");
+		ut1.setPassword("123");
+		ut2.setUsername("Mar");
+		ut2.setPassword("456");
+		this.utilizadores.add(ut1);
+		this.utilizadores.add(ut2);
+		this.utilizadores = new ArrayList<Verificacaologin>();
+		Verificacaologin ut1=new Verificacaologin();
+		Verificacaologin ut2=new Verificacaologin();
+		ut1.setUsername("XXX");
+		ut1.setPassword("123");
+		ut2.setUsername("Mar");
+		ut2.setPassword("456");
+		this.utilizadores.add(ut1);
+		this.utilizadores.add(ut2);
 		//this.numTentativas=0;
 	}
 
@@ -180,7 +207,7 @@ public class Login implements Serializable {
 		}else{
 			this.mensagem="Utilizador já existente, escolha novo username";
 			this.user="";
-			//	chat.setUtilizador(this.user);
+			chat.setUtilizador(this.user);
 			this.password="";
 			return "login";
 		}
@@ -211,6 +238,7 @@ public class Login implements Serializable {
 			return "login";
 		}
 	}
+	
 	
 
 
