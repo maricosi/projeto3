@@ -20,7 +20,7 @@ public class Login implements Serializable {
 
 	private static final long serialVersionUID = -2921010109456538382L;
 
-	//	@Inject Mensagem chat;
+		@Inject Mensagem chat;
 	@Inject 
 	Verificacaologin verifica;
 	//conjunto de utilizadores inscritos
@@ -125,7 +125,7 @@ public class Login implements Serializable {
 
 		if(verifyPass(this.password, this.user)&& !basedados.logado(user)){
 			this.mensagem = "Bem Vindo ao Sistema "+this.user+"!";
-			//	chat.setUtilizador(this.user);
+				chat.setUtilizador(this.user);
 			
 			basedados.setlogado(user,true);
 			this.user="";
@@ -175,7 +175,7 @@ public class Login implements Serializable {
 			ut.setUsername(this.user);
 			ut.setPassword(this.password);
 			this.utilizadores.add(ut);
-			//	chat.setUtilizador(this.user);
+				chat.setUtilizador(this.user);
 			this.mensagem="Utilizador registado com sucesso!";
 			this.user="";
 			this.password="";
@@ -186,7 +186,7 @@ public class Login implements Serializable {
 		}else{
 			this.mensagem="Utilizador já existente, escolha novo username";
 			this.user="";
-			//	chat.setUtilizador(this.user);
+			chat.setUtilizador(this.user);
 			this.password="";
 			return "login";
 		}
@@ -201,7 +201,7 @@ public class Login implements Serializable {
 			ut.setUsername(this.user);
 			ut.setPassword(this.password);
 			basedados.addUser(ut);
-			//	chat.setUtilizador(this.user);
+			chat.setUtilizador(this.user);
 			this.mensagem="Utilizador registado com sucesso!";
 			this.user="";
 			this.password="";
@@ -212,7 +212,7 @@ public class Login implements Serializable {
 		}else{
 			this.mensagem="Utilizador já existente, escolha novo username";
 			this.user="";
-			//	chat.setUtilizador(this.user);
+			chat.setUtilizador(this.user);
 			this.password="";
 			return "login";
 		}

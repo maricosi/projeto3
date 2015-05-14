@@ -14,6 +14,16 @@
 <body>
 	<ui:insert name="chat">
 		<ui:include src="template/commonChat.xhtml" />
+		
+		<h:form prependId="false">
+            <h:panelGrid columns="2">
+               
+                Mensagem: <p:inputText value="#{mensagem.txt}"/>
+                <p:commandButton type="reset" value="Apagar"/>
+                <p:commandButton value="Enviar!" actionListener="#{chat.}"/>
+            </h:panelGrid>
+ 		</h:form>
+	
 	</ui:insert>
 </body>
 </html>
