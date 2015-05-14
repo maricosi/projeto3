@@ -1,9 +1,11 @@
 @CHARSET "ISO-8859-1";
 
 #calculadora {
-	display: table-cell;
+	display: inline-block;
+	height: 500px;
 }
 
+}
 #ninja_esq {
 	float: left;
 	display: inline-block;
@@ -130,6 +132,7 @@ h1 {
 	margin-bottom: 20px;
 	background-color: #333300;
 	width: 255px;
+	margin-right: auto;
 }
 
 #basica {
@@ -142,8 +145,8 @@ h1 {
 
 .ecran {
 	margin-left: 5px;
-	margin-right:5px;
-	margin-top:5px; 
+	margin-right: 5px;
+	margin-top: 5px;
 	height: 50px;
 	width: 220px;
 	font-size: 18px;
@@ -165,8 +168,8 @@ td {
 	font-family: Verdana;
 }
 
-#linha{
-	width:220px;
+#linha {
+	width: 220px;
 	height: 23px;
 }
 
