@@ -195,7 +195,7 @@ public class Calc implements Serializable{
 		if(mostrador.length() > 0 && expressao.peekLastInput().getTipo().contains("nm")){
 			String tmp = expressao.peekLastInput().getConteudo();			
 			double val = Double.parseDouble(tmp);
-			if(val%1 == 0 && val > 0 && val <= 10000000){
+			if(val%1 == 0 && val > 0 && val <= 180){
 				mostrador = expressao.add(new Input("op", "!"));
 			}			
 		}

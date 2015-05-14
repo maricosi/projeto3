@@ -3,8 +3,9 @@
  */
 
 window.onload=function(){
-	setInterval(function(){document.getElementById("teste:btn-refresh").click();},1000);
+setInterval(function(){document.getElementById("chat:btn-refresh").click();},1000);
 }
+
 
 function redirect(){
 	if(document.forms['header']['header:tipo'][0].checked == true){

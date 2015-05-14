@@ -38,15 +38,7 @@ public class Login implements Serializable {
 	
 	public Login() {
 		super();
-		this.utilizadores = new ArrayList<Verificacaologin>();
-		Verificacaologin ut1=new Verificacaologin();
-		Verificacaologin ut2=new Verificacaologin();
-		ut1.setUsername("XXX");
-		ut1.setPassword("123");
-		ut2.setUsername("Mar");
-		ut2.setPassword("456");
-		this.utilizadores.add(ut1);
-		this.utilizadores.add(ut2);
+		
 		//this.numTentativas=0;
 	}
 
@@ -128,8 +120,7 @@ public class Login implements Serializable {
 			//	chat.setUtilizador(this.user);
 			
 			basedados.setlogado(user,true);
-			this.user="";
-			this.password="";
+			
 			//				this.numTentativas=0;
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + "/basic.xhtml");
@@ -156,7 +147,10 @@ public class Login implements Serializable {
 
 	public void logout(String user) throws IOException {
 		
+		System.out.println(basedados.logado(user));
 		basedados.setlogado(user,false);
+		System.out.println(basedados.logado(user));
+		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.invalidateSession();
 		mensagem="";
