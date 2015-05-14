@@ -1,21 +1,33 @@
 package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
+
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+
 @Named
 @ApplicationScoped
 public class Chat implements Serializable{
 
 	private static final long serialVersionUID = 6173082123788942581L;
-	@Inject Mensagem msg;
-	private LinkedList<String> conversa;
+	@Inject 
+	private Mensagem msg;
+	private ArrayList<Mensagem> conversa;
 	private String utilizador;
+	private String mensagemUti;
 
 		
+
+
+	public Chat() {
+		super();
+		this.conversa = new ArrayList<Mensagem>();
+	}
+	
 	public String getUtilizador() {
 		return utilizador;
 	}
@@ -24,20 +36,29 @@ public class Chat implements Serializable{
 		this.utilizador = utilizador;
 	}
 
-	public Chat() {
-		super();
-		this.conversa = new LinkedList<String>();
-		this.conversa.add("");
-	}
-
-	public LinkedList<String> getConversa() {
+	public ArrayList<Mensagem> getConversa() {
 		return conversa;
 	}
 
 	public void actualizar() {
-		
-		this.conversa.addLast(msg.getDate()+" "+msg.getUtilizador()+":"+msg.getTxt());
+		Mensagem nmsg=new Mensagem();
+		nmsg.setTxt(msg.getTxt());
+		nmsg.setDataMsg(msg.getDate());
+		nmsg.setUtilizador(msg.getUtilizador());
+		this.conversa.add(0,nmsg);
+		mensagemUti="";
 	}
+
+	public String getMensagemUti() {
+		return mensagemUti;
+	}
+
+	public void setMensagemUti(String mensagemUti) {
+		msg.setTxt(mensagemUti);
+		this.mensagemUti = mensagemUti;
+	}
+	
+	
 	
 	
 }

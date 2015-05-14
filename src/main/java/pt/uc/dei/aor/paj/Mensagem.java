@@ -5,11 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-@SessionScoped
+
 @Named
+@SessionScoped
 public class Mensagem implements Serializable{
 
 	private static final long serialVersionUID = -9174255723670902683L;
@@ -17,6 +19,14 @@ public class Mensagem implements Serializable{
 	private String txt;
 	private String date;
 
+	
+	
+	public Mensagem() {
+		super();
+		this.utilizador = "";
+		this.txt = "";
+		this.date = "";
+	}
 	public String getUtilizador() {
 		return utilizador;
 	}
@@ -39,5 +49,7 @@ public class Mensagem implements Serializable{
 		SimpleDateFormat formatador = new SimpleDateFormat("hh:mm");
 		this.date=formatador.format(hora)+"";
 	}
-
+	public void setDataMsg(String dt) {
+		this.date=dt;
+	}
 }

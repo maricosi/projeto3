@@ -15,9 +15,9 @@
 
 			<h:form id="benvindo">
 				<h1>Benvindo #{login.user}!!</h1>
-				<h:commandButton id="logout" value="Logout"
+				<h:commandButton id="logout" value="Logout" 
 					action="#{login.logout(login.user)}" />
-				<h:commandButton id="btn-refresh">
+				<h:commandButton id="btn-refresh" style="display:none">
 					<f:ajax render="out estatisticaTabela" />
 				</h:commandButton>
 				<p></p>
@@ -26,16 +26,40 @@
 		</div>
 		<div id="chat">
 			<h:form prependId="false">
-				<h:outputText value="#{chat.conversa}" id="saidaConversa"
-					style="text-align:left;" />
-					<br></br>
-				<h:inputText value="#{mensagem.txt}" id="idTxt"
+				<h:dataTable id="saidaConversa" value="#{chat.conversa}" var="msg">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Utilizador" />
+						</f:facet>
+						<h:outputText value="#{msg.utilizador}" title="Utilizador" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Data" />
+						</f:facet>
+						<h:outputText value="#{msg.date}" title="Data" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Mensagem" />
+						</f:facet>
+						<h:outputText value="#{msg.txt}" title="Mensagem" />
+					</h:column>
+				</h:dataTable>
+
+				<h:inputText value="#{chat.mensagemUti}" id="idTxt"
 					styleClass="boxlogin" />
+				<h:commandButton id="Clear" value="Limpar" type="reset" />
 				<f:ajax event="click" execute="idTxt send" render="saidaConversa"
 					listener="#{chat.actualizar}">
-					<h:commandButton id="send" value="Send"></h:commandButton>
+					<h:commandButton id="send" value="Enviar"
+						action="#{chat.actualizar}" />
 				</f:ajax>
-				</h:form>
+
+
+			</h:form>
 		</div>
 
 	</aside>

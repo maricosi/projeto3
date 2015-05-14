@@ -126,10 +126,8 @@ public class Login implements Serializable {
 
 	public void logout(String user) throws IOException {
 
-		System.out.println(basedados.logado(user));
+		
 		basedados.setlogado(user,false);
-		System.out.println(basedados.logado(user));
-
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.invalidateSession();
 		mensagem="";
