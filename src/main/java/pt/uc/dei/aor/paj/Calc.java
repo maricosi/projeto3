@@ -23,24 +23,19 @@ public class Calc implements Serializable{
 
 	private String mostrador="";
 	private String type="";
-
-	
 	private Expressao expressao;
-
 	@Inject
 	private Historico hist;
-
 	@Inject 
 	private Estatistica est;
 	/*@Inject
 	private Login login;*/
-
 	private boolean virgulaValida; // indica se é válido usar a vírgula na expressão
 	private boolean operadorValido; // indica se é válido usar um operador na expressão
 	private boolean existeVirgula; // indica se existe uma vírgula na última parte numérica da expressão
 	private boolean parentsisAberto; // indica se existe um parentsis aberto
 	private boolean graus = false;	// indica se os ângulos introduzidos são em radianos (predefinido) ou em graus
-	//duarte
+
 	private boolean simples;
 
 
@@ -51,7 +46,7 @@ public class Calc implements Serializable{
 		init();	
 	}	
 	
-	//duarte
+	
 	public boolean isSimples() {
 		return simples;
 	}
@@ -209,8 +204,6 @@ public class Calc implements Serializable{
 				mostrador = res;
 			}			
 		}
-
-
 	}
 
 	private void factorial(){		
@@ -354,8 +347,6 @@ public class Calc implements Serializable{
 		String out;
 
 		// definição de novas funções
-
-
 		Function cosd = new Function("cosd", 1) {
 			@Override
 			public double apply(double... args) {
@@ -377,7 +368,6 @@ public class Calc implements Serializable{
 		};
 
 		Operator factorial = new Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
-
 			@Override
 			public double apply(double... args) {
 				final int arg = (int) args[0];
@@ -393,9 +383,6 @@ public class Calc implements Serializable{
 
 		try{
 			Expression e = new ExpressionBuilder(exp)
-
-
-
 
 			.function(cosd)
 			.function(sind)
