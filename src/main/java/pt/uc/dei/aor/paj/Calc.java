@@ -24,7 +24,7 @@ public class Calc implements Serializable{
 	private String mostrador="";
 	private String type="";
 
-	@Inject
+	
 	private Expressao expressao;
 
 	@Inject
@@ -46,7 +46,9 @@ public class Calc implements Serializable{
 
 	public Calc(){
 		simples=true;
-		init();		
+		mostrador = "";
+		expressao = new Expressao();
+		init();	
 	}	
 	
 	//duarte

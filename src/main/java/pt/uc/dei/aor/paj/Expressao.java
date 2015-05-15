@@ -5,11 +5,11 @@ import java.util.Stack;
 
 
 
-import javax.enterprise.context.SessionScoped;
+
 
 import java.io.Serializable;
 
-@SessionScoped
+
 public class Expressao implements Serializable {
 
 	
