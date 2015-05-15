@@ -14,7 +14,7 @@
 		<div id="logout">
 
 			<h:form id="benvindo">
-				<h1>Benvindo #{login.user}!!</h1>
+				<h1>Bemvindo #{login.user}!!</h1>
 				<h:commandButton id="logout" value="Logout" 
 					action="#{login.logout(login.user)}" />
 				<h:commandButton id="btn-refresh" style="display:none">
@@ -26,24 +26,24 @@
 		</div>
 		<div id="chat">
 			<h:form prependId="false">
-				<h:dataTable id="saidaConversa" value="#{chat.conversa}" var="msg" style="overflow:auto">
+				<h:dataTable id="saidaConversa"   value="#{chat.conversa}"  var="msg" style=" ">
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Utilizador" />
+							<h:outputText value=" " />
 						</f:facet>
 						<h:outputText value="#{msg.utilizador}" title="Utilizador" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Data" />
+							<h:outputText value="" />
 						</f:facet>
 						<h:outputText value="#{msg.date}" title="Data" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Mensagem" />
+							<h:outputText value="Chat" />
 						</f:facet>
 						<h:outputText value="#{msg.txt}" title="Mensagem" />
 					</h:column>

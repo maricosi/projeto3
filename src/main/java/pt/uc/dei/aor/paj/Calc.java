@@ -64,11 +64,12 @@ public class Calc implements Serializable{
 		}
 		return "style.css";
 	}
-
-	public void read(ActionEvent evento){
-
-
-		switch(evento.getComponent().getId()){
+	public void read(ActionEvent evento) {
+		this.read(evento.getComponent().getId());
+	}
+	
+	public void read(String cmd){
+		switch(cmd){
 		case "num0": {			
 			novoDigito("0");	
 		}break;
@@ -511,6 +512,20 @@ public class Calc implements Serializable{
 		this.mostrador = mostrador;
 	}
 
+	public boolean isOperadorValido() {
+		return operadorValido;
+	}
 
+	public void setOperadorValido(boolean operadorValido) {
+		this.operadorValido = operadorValido;
+	}
+
+	public boolean isExisteVirgula() {
+		return existeVirgula;
+	}
+
+	public void setExisteVirgula(boolean existeVirgula) {
+		this.existeVirgula = existeVirgula;
+	}
 
 }

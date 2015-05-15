@@ -2,9 +2,9 @@
  * 
  */
 
-window.onload=function(){
+/*window.onload=function(){
 setInterval(function(){document.getElementById("benvindo:btn-refresh").click();},1000);
-}
+}*/
 
 
 function redirect(){

@@ -37,7 +37,7 @@ public class Estatistica implements Serializable {
 		operation.add( new Operador("log","Logaritmo"));
 		operation.add( new Operador("!","Factorial"));
 		operation.add( new Operador("cbrt","Raiz Cúbica"));
-		operation.add( new Operador("e^x","Exponensial elevado a um valor"));
+		operation.add( new Operador("e^x","Exponensial elevado a..."));
 		operation.add( new Operador("10^x","Dez elevado a um valor"));
 
 	}
@@ -137,7 +137,7 @@ public class Estatistica implements Serializable {
 
 
 
-	public ArrayList <Operador> getEntrada() {
+	public synchronized ArrayList <Operador> getEntrada() {
 		Collections.sort(operation);
 		return operation;
 	}

@@ -36,11 +36,11 @@ public class Chat implements Serializable{
 		this.utilizador = utilizador;
 	}
 
-	public ArrayList<Mensagem> getConversa() {
+	public synchronized ArrayList<Mensagem> getConversa() {
 		return conversa;
 	}
 
-	public void actualizar() {
+	public synchronized void actualizar() {
 		Mensagem nmsg=new Mensagem();
 		nmsg.setTxt(msg.getTxt());
 		nmsg.setDataMsg(msg.getDate());

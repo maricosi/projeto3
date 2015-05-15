@@ -24,15 +24,15 @@ public class GestorUser {
 		users.add(x);
 	}
 
-	public ArrayList<Verificacaologin> getUsers() {
+	public synchronized ArrayList<Verificacaologin> getUsers() {
 		return users;
 	}
 
-	public void setUsers(ArrayList<Verificacaologin> users) {
+	public synchronized void setUsers(ArrayList<Verificacaologin> users) {
 		this.users = users;
 	}
 
-	public boolean logado(String user){
+	public synchronized boolean logado(String user){
 		boolean logado=false;
 		for(Verificacaologin p:users){
 			if(user.equals(p.getUsername())){
@@ -43,7 +43,7 @@ public class GestorUser {
 		return logado;
 	}
 
-	public void setlogado(String user,boolean flag){
+	public synchronized void setlogado(String user,boolean flag){
 		for(Verificacaologin p:users){
 			if(user.equals(p.getUsername())){
 				p.setLogged(flag);
