@@ -15,7 +15,7 @@
 
 			<h:form id="benvindo">
 				<h1>Bemvindo #{login.user}!!</h1>
-				<h:commandButton id="logout" value="Logout" 
+				<h:commandButton styleClass="buto"  value="Logout" 
 					action="#{login.logout(login.user)}" />
 				<h:commandButton id="btn-refresh" style="display:none">
 					<f:ajax render="out estatisticaTabela saidaConversa" />
@@ -51,10 +51,10 @@
 
 				<h:inputText value="#{chat.mensagemUti}" id="idTxt"
 					styleClass="boxlogin" />
-				<h:commandButton id="Clear" value="Limpar" type="reset" />
+				<h:commandButton  styleClass="butoChat" id="Clear" value="Limpar" type="reset" />
 				<f:ajax event="click" execute="idTxt send" render="saidaConversa"
 					listener="#{chat.actualizar}">
-					<h:commandButton id="send" value="Enviar"
+					<h:commandButton styleClass="butoChat" id="send" value="Enviar"
 						action="#{chat.actualizar}" />
 				</f:ajax>
 

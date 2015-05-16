@@ -13,11 +13,14 @@
 		<h:form id="header">
 			<header class="escolhaCalculadora">
 				<h1>Calculadora</h1>
-
-				<h:commandButton action="#{calc.setSimples(true)}" value="Simples" />
-				<h:commandButton action="#{calc.setSimples(false)}" value="Cientifica" />
-
-
+				<h:panelGroup rendered="#{login.logged}">
+					<h:commandButton styleClass="buto basica" action="#{calc.setSimples(true)}" value="Simples" />
+					<h:commandButton styleClass="buto cientifica" action="#{calc.setSimples(false)}"
+						value="Cientifica" />
+				</h:panelGroup>
+				<h:panelGroup rendered="#{!login.logged}">
+					<h2>Login</h2>
+				</h:panelGroup>
 			</header>
 		</h:form>
 	</ui:composition>

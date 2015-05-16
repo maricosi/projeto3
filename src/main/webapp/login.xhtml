@@ -5,60 +5,11 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<h:outputScript library="js" name="script.js" />
-	<h:outputStylesheet library="css" name="style.css" />
+	<title>Calculadora Login</title>
 </h:head>
 <body>
-	<div id="page">
-		<h:form prependId="false">
-			<table>
-				<tr>
-					<td>Name:</td>
-					<td><h:inputText id="nome" value="#{login.user}" /></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><h:inputSecret id="password" value="#{login.password}" /></td>
-				</tr>
-			</table>
-			<p>
-				<h:commandButton styleClass="btnLogin" tabindex="4" value="Login"
-					action="#{login.logar}">
-					<f:ajax execute="nome password" render="saidaLogin" />
-				</h:commandButton>
-			</p>
-			<h2>
-				<h:outputText id="out" value="#{login.mensagem}" />
-			</h2>
-			<br />
-			<h:commandButton value="Registo" action="#{login.novoUser}" />
+	<ui:composition template="template/commomLayoutLogin.xhtml">
+	</ui:composition>
 
-			<f:ajax execute="Refresh" render="out mostrador historicoTabela">
-				<h:commandButton id="btn-refresh" style="display:none;" />
-			</f:ajax>
-
-
-		</h:form>
-
-		<h2>Novo Utilizador</h2>
-		<br />
-		<h:form prependId="false">
-			<h:outputText value="Utilizador: " />
-			<h:inputText value="#{login.user}" id="novoUsr" />
-			<br />
-			<h:outputText value="Password:" />
-			<h:inputSecret value="#{login.password}" id="novaPsw" />
-			<h:commandButton value="Registar" action="#{login.novoUser}">
-				<f:ajax execute="novoUsr novaPsw" render="registo" />
-			</h:commandButton>
-			
-			<br />
-		</h:form>
-
-		<div class="errorMessage">
-			<h:messages showSummary="true" showDetail="false"
-				errorStyle="color: #d20005" infoStyle="color: blue" />
-		</div>
-	</div>
 </body>
 </html>

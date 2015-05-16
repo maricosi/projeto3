@@ -24,7 +24,8 @@ public class Login implements Serializable {
 
 	@Inject 
 	private Mensagem chat;
-	private String user, password, mensagem, mensagem2;
+	private String user, password, mensagem;
+	private boolean logged;
 	@Inject
 	private Historico histLogout;
 	@Inject
@@ -101,9 +102,6 @@ public class Login implements Serializable {
 		return user;
 	}
 
-	public String getMensagem2() {
-		return mensagem2;
-	}
 
 	public String getPassword() {
 		return password;
@@ -119,7 +117,7 @@ public class Login implements Serializable {
 			this.mensagem = "Bem Vindo ao Sistema "+this.user+"!";
 			chat.setUtilizador(this.user);
 			basedados.setlogado(user,true);
-			
+			this.logged=true;
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			HttpSession sessao= (HttpSession) ec.getSession(true);
 			sessao.setAttribute("loggedin", true);
@@ -149,11 +147,16 @@ public class Login implements Serializable {
 		basedados.setlogado(user,false);
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		ec.invalidateSession();
-		mensagem="";
+		this.mensagem="";
+		this.logged=false;
 		histLogout.getEntradas().clear();
 		ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
 	}	
 
+
+	public boolean isLogged() {
+		return logged;
+	}
 
 	//Acrescenta novo utilizador caso não exista
 	public String novoUser()throws IOException{
