@@ -1,5 +1,12 @@
 @CHARSET "ISO-8859-1";
 
+
+.out {
+	color: Tomato;
+	font-weight: lighter;
+	text-align: center
+}
+
 #loginRegisto {
 	text-align: center;
 	height: auto;
@@ -140,12 +147,7 @@
 
 
 
-#out {
-	color: Tomato;
-	text-decoration: blink;
-	font-weight: lighter;
-	text-align: center
-}
+
 
 .textoLogin {
 	font-weight: bolder;

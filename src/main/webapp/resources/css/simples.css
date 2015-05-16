@@ -137,9 +137,8 @@
 	border-bottom-left-radius: 0px;
 }
 
-#out {
+.out {
 	color: Tomato;
-	text-decoration: blink;
 	font-style: normal;
 	text-align: center
 }

@@ -18,7 +18,7 @@
 			</ui:insert>
 		</div>
 		<div id="loginRegisto">
-			<h:form prependId="false">
+			<h:form pretendId="false">
 
 				<h2>Login</h2>
 				<table id="login">
@@ -38,17 +38,17 @@
 					</h:commandButton>
 				</p>
 				<br />
-				<h2>
+				<h2 class="out">
 					<h:outputText id="out" value="#{login.mensagem}" />
 				</h2>
 
-				<f:ajax execute="Refresh" render="out mostrador historicoTabela">
-					<h:commandButton id="btn-refresh" style="display:none;" />
-				</f:ajax>
+				<h:commandButton id="btn-refresh" style="display:none">
+					<f:ajax render="out" />
+				</h:commandButton>
 
 			</h:form>
 			<h:form prependId="false">
-			<br />
+				<br />
 				<h2>Novo Registo</h2>
 
 				<table id="Registo">
@@ -62,10 +62,12 @@
 					</tr>
 				</table>
 				<p>
-					<h:commandButton styleClass="buto" value="Registar" action="#{login.novoUser}">
+					<h:commandButton styleClass="buto" value="Registar"
+						action="#{login.novoUser}">
 						<f:ajax execute="novoUsr novaPsw" render="registo" />
 					</h:commandButton>
 				</p>
+
 
 			</h:form>
 

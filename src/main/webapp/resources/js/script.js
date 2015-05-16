@@ -3,7 +3,7 @@
  */
 
 window.onload=function(){
-setInterval(function(){document.getElementById("benvindo:btn-refresh").click();},1000);
+setInterval(function(){document.getElementById("benvindo:btn-refresh false:btn-refresh").click();},1000);
 }
 
 

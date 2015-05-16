@@ -94,7 +94,7 @@ public class Login implements Serializable {
 		return mensagem;
 	}
 
-/*	public void setMensagem(String mensagem) {
+	/*	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}*/
 
@@ -166,7 +166,14 @@ public class Login implements Serializable {
 		existe=verifyUser(this.user);
 		conteudoPass=verifyPass(this.password);
 
-		if (!existe && conteudoPass ){
+		if(existe){
+			this.mensagem="Utilizador já existente, escolha novo username!!";
+			this.user="";
+			this.password="";
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
+			return "login.xhtml";
+		}else if (!existe && conteudoPass ){
 			Verificacaologin ut=new Verificacaologin();
 			ut.setUsername(this.user);
 			ut.setPassword(this.password);
@@ -184,18 +191,14 @@ public class Login implements Serializable {
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
 			return "login.xhtml";
-
-		}else if(existe){
-			this.mensagem="Utilizador já existente, escolha novo username";
-			this.user="";
-			this.password="";
-			return "login.xhtml";
 		} else {
 			this.user="";
 			this.password="";
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
 			return "login.xhtml";
 		}
-		
+
 	}
 
 
