@@ -62,8 +62,6 @@ public class Login implements Serializable {
 		for(int i=0; i<nuser;i++){
 			if(basedados.getUsers().get(i).getUsername().equals(username)){
 				existe=true;
-			}else {
-				existe=false;
 			}
 		}
 		return existe;
@@ -88,9 +86,7 @@ public class Login implements Serializable {
 		for(int i=0; i<nuser;i++){
 			if(basedados.getUsers().get(i).getUsername().equals(username) && basedados.getUsers().get(i).getPassword().equals(pass)){
 				existe=true;
-			} else {
-				existe=false;
-			}
+			} 
 		}
 		return existe;
 	}
