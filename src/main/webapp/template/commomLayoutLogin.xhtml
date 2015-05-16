@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputScript library="js" name="script.js" />
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<body>
+	<div id="page">
+
+		<div>
+			<ui:insert name="header">
+				<ui:include src="commonHeader.xhtml" />
+			</ui:insert>
+		</div>
+		<div id="loginRegisto">
+			<h:form prependId="false">
+
+				<h2>Login</h2>
+				<table id="login">
+					<tr>
+						<td class="textoLogin">Name:</td>
+						<td><h:inputText id="nome" value="#{login.user}" /></td>
+					</tr>
+					<tr>
+						<td class="textoLogin">Password:</td>
+						<td><h:inputSecret id="password" value="#{login.password}" /></td>
+					</tr>
+				</table>
+				<p>
+					<h:commandButton styleClass="buto" tabindex="4" value="Login"
+						action="#{login.logar}">
+						<f:ajax execute="nome password" render="saidaLogin" />
+					</h:commandButton>
+				</p>
+				<br />
+				<h2>
+					<h:outputText id="out" value="#{login.mensagem}" />
+				</h2>
+
+				<f:ajax execute="Refresh" render="out mostrador historicoTabela">
+					<h:commandButton id="btn-refresh" style="display:none;" />
+				</f:ajax>
+
+			</h:form>
+			<h:form prependId="false">
+			<br />
+				<h2>Novo Registo</h2>
+
+				<table id="Registo">
+					<tr>
+						<td class="textoLogin">Utilizador:</td>
+						<td><h:inputText id="novoUsr" value="#{login.user}" /></td>
+					</tr>
+					<tr>
+						<td class="textoLogin">Password:</td>
+						<td><h:inputSecret value="#{login.password}" id="novaPsw" /></td>
+					</tr>
+				</table>
+				<p>
+					<h:commandButton styleClass="buto" value="Registar" action="#{login.novoUser}">
+						<f:ajax execute="novoUsr novaPsw" render="registo" />
+					</h:commandButton>
+				</p>
+
+			</h:form>
+
+			<div class="errorMessage">
+				<h:messages showSummary="true" showDetail="false"
+					errorStyle="color: #d20005" infoStyle="color: blue" />
+			</div>
+		</div>
+
+		<div>
+			<ui:insert name="footer">
+				<ui:include src="commonFooter.xhtml" />
+			</ui:insert>
+		</div>
+
+	</div>
+</body>
+</html>
