@@ -6,7 +6,7 @@
 
 <h:head>
 	<h:outputScript library="js" name="script.js" />
-	
+
 
 </h:head>
 <body>
@@ -15,7 +15,7 @@
 
 			<h:form id="benvindo">
 				<h1>Bemvindo #{login.user}!!</h1>
-				<h:commandButton styleClass="buto"  value="Logout" 
+				<h:commandButton styleClass="buto" value="Logout"
 					action="#{login.logout(login.user)}" />
 				<h:commandButton id="btn-refresh" style="display:none">
 					<f:ajax render="out estatisticaTabela saidaConversa" />
@@ -26,32 +26,37 @@
 		</div>
 		<div id="chat">
 			<h:form prependId="false">
-				<h:dataTable id="saidaConversa"   value="#{chat.conversa}"  var="msg" style=" ">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value=" " />
-						</f:facet>
-						<h:outputText value="#{msg.utilizador}" title="Utilizador" />
-					</h:column>
+				<div id="tabelaChat" style="overflow-y: scroll; height: 340px; margin: auto;" >
+					<h:dataTable id="saidaConversa" value="#{chat.conversa}" var="msg"
+						>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value=" " />
+							</f:facet>
+							<h:outputText value="#{msg.utilizador}" title="Utilizador" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="" />
-						</f:facet>
-						<h:outputText value="#{msg.date}" title="Data" />
-					</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="" />
+							</f:facet>
+							<h:outputText value="#{msg.date}" title="Data" />
+						</h:column>
 
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="Chat" />
-						</f:facet>
-						<h:outputText value="#{msg.txt}" title="Mensagem" />
-					</h:column>
-				</h:dataTable>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Chat" />
+							</f:facet>
+							<h:outputText value="#{msg.txt}" title="Mensagem"
+								style="overflow-y: scroll;" />
+						</h:column>
+					</h:dataTable>
+				</div>
 
 				<h:inputText value="#{chat.mensagemUti}" id="idTxt"
 					styleClass="boxlogin" />
-				<h:commandButton  styleClass="butoChat" id="Clear" value="Limpar" type="reset" />
+				<h:commandButton styleClass="butoChat" id="Clear" value="Limpar"
+					type="reset" />
 				<f:ajax event="click" execute="idTxt send" render="saidaConversa"
 					listener="#{chat.actualizar}">
 					<h:commandButton styleClass="butoChat" id="send" value="Enviar"

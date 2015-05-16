@@ -179,19 +179,23 @@ public class Login implements Serializable {
 			ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
 			return "index.xhtml";
 		} else if(!existe && !conteudoPass ){
-			this.mensagem="Password invalida!!";
+			this.mensagem="Password invalida!!Tem de ter mais de 5 carateres!!";
 			this.password="";
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			ec.redirect(ec.getRequestContextPath() + "/login.xhtml");
 			return "login.xhtml";
 
-		}else{
+		}else if(existe){
 			this.mensagem="Utilizador já existente, escolha novo username";
 			this.user="";
-			//chat.setUtilizador(this.user);
+			this.password="";
+			return "login.xhtml";
+		} else {
+			this.user="";
 			this.password="";
 			return "login.xhtml";
 		}
+		
 	}
 
 
