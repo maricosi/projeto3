@@ -38,6 +38,8 @@ public class GestorUser {
 		for(Verificacaologin p:users){
 			if(user.equals(p.getUsername())){
 				logado=p.isLogged();
+			} else{
+				logado=false;
 			}
 
 		}

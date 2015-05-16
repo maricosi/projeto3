@@ -62,6 +62,8 @@ public class Login implements Serializable {
 		for(int i=0; i<nuser;i++){
 			if(basedados.getUsers().get(i).getUsername().equals(username)){
 				existe=true;
+			}else {
+				existe=false;
 			}
 		}
 		return existe;
@@ -73,6 +75,8 @@ public class Login implements Serializable {
 			existe=false;
 		} else if(pass.length()>5){
 			existe=true;
+		} else {
+			existe=false;
 		}
 		return existe;
 	}
@@ -84,6 +88,8 @@ public class Login implements Serializable {
 		for(int i=0; i<nuser;i++){
 			if(basedados.getUsers().get(i).getUsername().equals(username) && basedados.getUsers().get(i).getPassword().equals(pass)){
 				existe=true;
+			} else {
+				existe=false;
 			}
 		}
 		return existe;
@@ -94,9 +100,6 @@ public class Login implements Serializable {
 		return mensagem;
 	}
 
-	/*	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
-	}*/
 
 	public String getUser() {
 		return user;
@@ -111,10 +114,8 @@ public class Login implements Serializable {
 	//estava void
 	public String logar()throws IOException{
 
-		//if (this.numTentativas<=3){
-
 		if(verifyPassUser(this.password, this.user)&& !basedados.logado(user)){
-			this.mensagem = "Bem Vindo ao Sistema "+this.user+"!";
+			this.mensagem = "Bem-vindo ao Sistema "+this.user+"!";
 			chat.setUtilizador(this.user);
 			basedados.setlogado(user,true);
 			this.logged=true;
@@ -142,7 +143,6 @@ public class Login implements Serializable {
 	}
 
 	public void logout(String user) throws IOException {
-
 
 		basedados.setlogado(user,false);
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
